@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Network Packet Analyzer</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: radial-gradient(circle at top, #0a0f0a, #000);
+            color: #eaffea;
+            margin: 0;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            color: #00ff88;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.6);
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px #00ff88;
+            }
+
+            to {
+                text-shadow: 0 0 20px #00ff88;
+            }
+        }
+
+        .table-container {
+            max-width: 1100px;
+            margin: auto;
+            background: rgba(0, 20, 0, 0.6);
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.15);
+            transition: transform 0.4s ease;
+        }
+
+        .table-container:hover {
+            transform: scale(1.01);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            position: sticky;
+            top: 0;
+            background: #001f12;
+            z-index: 1;
+        }
+
+        th {
+            padding: 12px;
+            text-align: left;
+            color: #00ff88;
+            font-weight: 600;
+            border-bottom: 2px solid #00ff88;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+            font-size: 14px;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        tr:hover td {
+            background: rgba(0, 255, 136, 0.08);
+            transform: scale(1.01);
+        }
+
+        .protocol {
+            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .TCP {
+            background: rgba(0, 180, 255, 0.2);
+            color: #66ccff;
+            box-shadow: 0 0 8px rgba(0, 180, 255, 0.6);
+        }
+
+        .UDP {
+            background: rgba(255, 165, 0, 0.2);
+            color: #ffb84d;
+            box-shadow: 0 0 8px rgba(255, 165, 0, 0.6);
+        }
+
+        .ICMP {
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff6666;
+            box-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
+        }
+
+        .OTHER {
+            background: rgba(200, 200, 200, 0.2);
+            color: #ccc;
+        }
+
+        .payload {
+            max-width: 400px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
+        }
+
+        .payload:hover {
+            white-space: normal;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 12px;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>🌐 Live Network Packet Analyzer</h2>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Source IP</th>
+                    <th>Destination IP</th>
+                    <th>Protocol</th>
+                    <th>Payload</th>
+                </tr>
+            </thead>
+            <tbody id="packetTable"></tbody>
+        </table>
+    </div>
+
+    
+
+    <script>
+        setInterval(() => {
+            fetch("/packets")
+                .then(res => res.json())
+                .then(data => {
+                    let rows = "";
+                    data.forEach(p => {
+                        rows += `
+                        <tr>
+                            <td>${p.src}</td>
+                            <td>${p.dst}</td>
+                            <td><span class="protocol ${p.protocol}">${p.protocol}</span></td>
+                            <td class="payload" title="${p.payload}">${p.payload}</td>
+                        </tr>`;
+                    });
+                    document.getElementById("packetTable").innerHTML = rows;
+                });
+        }, 2000);
+    </script>
+
+</body>
+
+</html>
