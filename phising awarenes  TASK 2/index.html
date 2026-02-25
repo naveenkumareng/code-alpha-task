@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Phishing Awareness Training</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #f4f6f9;
+        color: #333;
+    }
+
+    header {
+        background: #0a2540;
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+
+    nav {
+        background: #163b63;
+        padding: 10px;
+        text-align: center;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        margin: 0 15px;
+        font-weight: bold;
+    }
+
+    nav a:hover {
+        color: #ffcc00;
+    }
+
+    section {
+        padding: 30px;
+    }
+
+    .card {
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .danger {
+        border-left: 5px solid red;
+    }
+
+    .safe {
+        border-left: 5px solid green;
+    }
+
+    button {
+        background: #0a2540;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #ffcc00;
+        color: black;
+    }
+
+    footer {
+        background: #0a2540;
+        color: white;
+        text-align: center;
+        padding: 10px;
+    }
+</style>
+
+</head>
+<body>
+
+<header>
+    <h1>🛡️ Phishing Awareness Training</h1>
+    <p>Learn to identify, avoid & report phishing attacks</p>
+</header>
+
+<nav>
+    <a href="#phishing">Phishing</a>
+    <a href="#emails">Fake Emails</a>
+    <a href="#engineering">Social Engineering</a>
+    <a href="#tips">Safety Tips</a>
+    <a href="#quiz">Quiz</a>
+</nav>
+
+<section id="phishing">
+    <div class="card">
+        <h2>What is Phishing?</h2>
+        <p>
+            Phishing is a cyber attack where criminals trick users into 
+            revealing sensitive information like passwords, OTPs, or bank details.
+        </p>
+    </div>
+</section>
+
+<section id="emails">
+    <div class="card danger">
+        <h2>🚨 How to Identify Phishing Emails</h2>
+        <ul>
+            <li>Urgent messages ("Your account will be blocked")</li>
+            <li>Unknown sender address</li>
+            <li>Suspicious links & attachments</li>
+            <li>Spelling & grammar mistakes</li>
+        </ul>
+    </div>
+
+    <div class="card safe">
+        <h2>✅ How Real Emails Look</h2>
+        <ul>
+            <li>Official domain names</li>
+            <li>No urgent threats</li>
+            <li>Clear branding</li>
+        </ul>
+    </div>
+</section>
+
+<section id="engineering">
+    <div class="card">
+        <h2>🎭 Social Engineering Tactics</h2>
+        <p>Attackers manipulate emotions like:</p>
+        <ul>
+            <li>Fear (Account hacked!)</li>
+            <li>Greed (You won a prize)</li>
+            <li>Trust (Pretending to be bank officials)</li>
+        </ul>
+    </div>
+</section>
+
+<section id="tips">
+    <div class="card">
+        <h2>🛡️ Best Practices to Stay Safe</h2>
+        <ul>
+            <li>Never click unknown links</li>
+            <li>Verify sender identity</li>
+            <li>Enable 2FA</li>
+            <li>Never share OTP or passwords</li>
+        </ul>
+    </div>
+</section>
+
+<section id="quiz">
+    <div class="card">
+        <h2>🧠 Quick Quiz</h2>
+        <p>Is this a phishing email?</p>
+        <p><i>"Your bank account is suspended. Click here to verify."</i></p>
+
+        <button onclick="checkAnswer(true)">Phishing</button>
+        <button onclick="checkAnswer(false)">Safe</button>
+
+        <p id="result"></p>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 Phishing Awareness Project | Cyber Security Training</p>
+</footer>
+
+<script>
+function checkAnswer(answer) {
+    let result = document.getElementById("result");
+    if(answer) {
+        result.innerHTML = "✅ Correct! This is a phishing attempt.";
+        result.style.color = "green";
+    } else {
+        result.innerHTML = "❌ Wrong! This email shows phishing signs.";
+        result.style.color = "red";
+    }
+}
+</script>
+
+</body>
+</html>
